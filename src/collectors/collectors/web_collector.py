@@ -9,6 +9,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from urllib.parse import urlparse
@@ -444,14 +445,23 @@ class WebCollector(BaseCollector):
         page = 1
         while self.selectors['load_more'] and page < self.pagination_limit:
             try:
-                load_more = self.__find_element_by(browser, self.selectors['load_more'])
+                load_more = WebDriverWait(browser, 5).until(
+                    EC.element_to_be_clickable(self.__get_element_locator(self.selectors['load_more'])))
                 # TODO: check for None
-                load_more.click()
-                ActionChains(browser) \
-                    .move_to_element(load_more) \
-                    .click(load_more) \
-                    .perform()
-                time.sleep(1) # is there a better way?
+
+                try:
+                    action = ActionChains(browser)
+                    action.move_to_element(load_more)
+                    load_more.click()
+                except Exception:
+                    browser.execute_script("arguments[0].scrollIntoView(true);", load_more)
+                    load_more.click()
+
+                try:
+                    WebDriverWait(browser, 5).until(EC.staleness_of(load_more))
+                except Exception:
+                    pass
+
             except Exception:
                 break
             page += 1
