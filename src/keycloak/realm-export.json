@@ -559,6 +559,7 @@
         {
             "id": "8ae28eab-de8d-4f6e-b1a8-74cb5cff2183",
             "clientId": "admin-cli",
+            "secret": "supersecret",
             "name": "${client_admin-cli}",
             "surrogateAuthRequired": false,
             "enabled": true,
@@ -572,8 +573,8 @@
             "standardFlowEnabled": false,
             "implicitFlowEnabled": false,
             "directAccessGrantsEnabled": true,
-            "serviceAccountsEnabled": false,
-            "publicClient": true,
+            "serviceAccountsEnabled": true,
+            "publicClient": false,
             "frontchannelLogout": false,
             "protocol": "openid-connect",
             "attributes": {},
@@ -2145,5 +2146,45 @@
     },
     "clientPolicies": {
         "policies": []
-    }
+    },
+    "users": [
+        {
+            "id": "5c225017-d2ba-403d-be3f-4517bfa8daff",
+            "createdTimestamp": 1611929920559,
+            "username": "service-account-admin-cli",
+            "enabled": true,
+            "totp": false,
+            "emailVerified": false,
+            "serviceAccountClientId": "admin-cli",
+            "disableableCredentialTypes": [],
+            "requiredActions": [],
+            "realmRoles": [
+                "offline_access",
+                "uma_authorization"
+            ],
+            "clientRoles": {
+                "realm-management": [
+                    "query-realms",
+                    "manage-identity-providers",
+                    "create-client",
+                    "query-clients",
+                    "manage-users",
+                    "manage-realm",
+                    "realm-admin",
+                    "manage-authorization",
+                    "manage-events",
+                    "query-users",
+                    "impersonation",
+                    "query-groups",
+                    "manage-clients"
+                ],
+                "account": [
+                    "view-profile",
+                    "manage-account"
+                ]
+            },
+            "notBefore": 0,
+            "groups": []
+        }
+    ]
 }
