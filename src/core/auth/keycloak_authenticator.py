@@ -37,6 +37,8 @@ class KeycloakAuthenticator(BaseAuthenticator):
         try:
             # get json data from response
             data = response.json()
+            log_manager.log_debug('Keycloak authentication response:')
+            log_manager.log_debug(data)
         except Exception:
             log_manager.store_auth_error_activity("Keycloak returned an unexpected response.")
             return {'error': 'Internal server error'}, 500
