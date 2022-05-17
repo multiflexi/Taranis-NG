@@ -18,7 +18,10 @@ services:
         max-file: "10" 
 
   keycloak:
-    image: "jboss/keycloak:${KEYCLOAK_VERSION}"
+    image: "skcert/taranis-ng-keycloak:${TARANIS_NG_TAG}"
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile.keycloak
     restart: unless-stopped
     depends_on:
       - keycloak_db
@@ -29,7 +32,7 @@ services:
       DB_DATABASE: taranis-ng-keycloak
       DB_USER: taranis-ng-keycloak
       DB_PASSWORD: "${POSTGRES_KEYCLOAK_PASSWORD}"
-      KEYCLOAK_IMPORT: "/keycloak/realm-export.json"
+      KEYCLOAK_IMPORT: "/opt/jboss/keycloak/realm-export.json"
       KEYCLOAK_FRONTEND_URL: "${TARANIS_NG_HTTPS_URI}/api/v1/keycloak/auth"
       KEYCLOAK_USER: "${KEYCLOAK_USER}"
       KEYCLOAK_PASSWORD: "${KEYCLOAK_PASSWORD}"
@@ -38,9 +41,6 @@ services:
       JAVA_OPTS: "-Dkeycloak.profile.feature.upload_scripts=enabled"
     volumes:
       - "keycloak_data:/opt/jboss/keycloak/standalone/data"
-      - "../src/keycloak/realm-export.json:/keycloak/realm-export.json:ro"
-      - "../src/keycloak/disable-theme-cache.cli:/opt/jboss/startup-scripts/disable-theme-cache.cli:ro"
-      - "../src/keycloak/theme:/opt/jboss/keycloak/themes/taranis-ng:ro"
     logging:
       driver: "json-file"
       options:
