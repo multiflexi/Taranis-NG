@@ -19,7 +19,7 @@ class KeycloakAuthenticator(BaseAuthenticator):
         # verify code and get JWT token from keycloak
         response = post(
             url=environ.get(
-                'TARANIS_NG_KEYCLOAK_INTERNAL_URL') + 'auth/realms/' + environ.get('TARANIS_NG_KEYCLOAK_REALM') + '/protocol/openid-connect/token',
+                'TARANIS_NG_KEYCLOAK_INTERNAL_URL') + 'auth/realms/' + environ.get('KEYCLOAK_REALM_NAME') + '/protocol/openid-connect/token',
             data={
                 'grant_type': 'authorization_code',
                 'code': request.args['code'],  # code from url
