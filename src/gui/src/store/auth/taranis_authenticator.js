@@ -81,7 +81,7 @@ const getters = {
             login_uri = process.env.VUE_APP_TARANIS_NG_LOGIN_URL;
         }
 
-        login_uri = login_uri.replace('TARANIS_GUI_URI', own_base_uri + '/login');
+        login_uri = login_uri.replace('TARANIS_GUI_URI', encodeURIComponent(own_base_uri + '/login'));
         return login_uri;
     },
 
@@ -103,29 +103,7 @@ const getters = {
             logout_uri = process.env.VUE_APP_TARANIS_NG_LOGOUT_URL;
         }
 
-        logout_uri = logout_uri.replace('TARANIS_GUI_URI', own_base_uri + '/login');
-        return logout_uri;
-    },
-
-    hasInternalLogoutUrl() {
-        if (("$VUE_APP_JISKB_INTERNAL_LOGOUT_URL" !== "") && ("$VUE_APP_JISKB_INTERNAL_LOGOUT_URL"[0] !== "$"))
-            return true;
-        if (typeof(process) !== "undefined" && typeof(process.env) != "undefined")
-            return process.env.VUE_APP_JISKB_INTERNAL_LOGOUT_URL != null;
-        return false;
-    },
-
-    getInternalLogoutURL() {
-        const own_base_uri = document.URL.replace(/^([^:]*:\/*[^\/]*)\/.*/, '$1'); //eslint-disable-line
-        let logout_uri = '/logout';
-
-        if (("$VUE_APP_TARANIS_NG_INTERNAL_LOGOUT_URL" !== "") && ("$VUE_APP_TARANIS_NG_INTERNAL_LOGOUT_URL"[0] !== "$")) {
-            logout_uri = "$VUE_APP_TARANIS_NG_INTERNAL_LOGOUT_URL";
-        } else if (typeof(process) !== "undefined" && typeof(process.env) !== "undefined" && process.env.VUE_APP_TARANIS_NG_INTERNAL_LOGOUT_URL != null) {
-            logout_uri = process.env.VUE_APP_TARANIS_NG_INTERNAL_LOGOUT_URL;
-        }
-
-        logout_uri = logout_uri + "?gotoUrl=" +  encodeURIComponent(own_base_uri + '/login')
+        logout_uri = logout_uri.replace('TARANIS_GUI_URI', encodeURIComponent(own_base_uri + '/login'));
         return logout_uri;
     },
 
