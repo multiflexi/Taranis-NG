@@ -72,7 +72,6 @@ services:
       KEYCLOAK_CLIENT_SECRET_KEY: "supersecret"
       KEYCLOAK_VERIFY: "true"
       WORKERS_PER_CORE: "1"
-      TARANIS_NG_SAMPLE_DATA: "true"
 
       CVE_UPDATE_FILE: "${CVE_UPDATE_FILE}"
       CPE_UPDATE_FILE: "${CPE_UPDATE_FILE}"
