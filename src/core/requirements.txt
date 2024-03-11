@@ -32,7 +32,7 @@ schedule==0.6.0
 six==1.13.0
 sseclient-py==1.7
 soupsieve==1.9.5
-SQLAlchemy==1.4.47
+SQLAlchemy==2.0.28
 urllib3==1.26.7
 Werkzeug==0.16.0
 pycryptodomex==3.17
