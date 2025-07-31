@@ -1,0 +1,182 @@
+{
+    "product": {
+        "date": {
+            "day": 30,
+            "month": 1,
+            "year": 2024
+        },
+        "description": "",
+        "id": "example_cz",
+        "links": [
+            "https://github.com/squid-cache/squid/security/advisories/GHSA-8w9r-p88v-mmx9",
+            "https://github.com/squid-cache/squid/security/advisories/GHSA-xggx-9329-3c27",
+            "https://github.com/squid-cache/squid/security/advisories/GHSA-rj5h-46j6-q2g5",
+            "https://wiki.squid-cache.org/Features/CollapsedForwarding"
+        ],
+        "max_tlp": "CLEAR",
+        "product_type": "JSON",
+        "product_type_description": "",
+        "title": "Squid  verze 6.5 opravuje 3 vysoce z\u00e1va\u017en\u00e9 zranitelnosti",
+        "user": {
+            "id": 15,
+            "name": "Michaela Ma\u010dal\u00edkov\u00e1",
+            "username": "macalikova"
+        }
+    },
+    "report_items": [
+        {
+            "attrs": {
+                "description": "Squid verze 6.5 opravuje 3 vysoce závažné zranitelnosti, které  nevyžadují autentizaci a umožňují vykonat DoS útok [2].",
+                "links": [
+                    "https://github.com/squid-cache/squid/security/advisories/GHSA-rj5h-46j6-q2g5"
+                ],
+                "recommendations": "",
+                "tlp": "CLEAR"
+            },
+            "created": {
+                "day": 6,
+                "month": 12,
+                "year": 2023
+            },
+            "last_updated": {
+                "day": 24,
+                "month": 1,
+                "year": 2024
+            },
+            "name": "Squid - intro",
+            "name_prefix": "",
+            "news_items": [],
+            "type": "Vulnerability Report - Intro",
+            "type_description": "Introduction for Vulnerability Report",
+            "uuid": "cca17556-99aa-4e4a-91a6-dab131dd67b2"
+        },
+        {
+            "attrs": {
+                "affected_systems": [
+                    "Squid; >=2.2, <=5.9; >=6.0, <=6.4"
+                ],
+                "confidentiality": "",
+                "cve": [
+                    "CVE-2023-49285"
+                ],
+                "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+                "cvss_number": "8.6",
+                "description": "Vzd\u00e1len\u00e9mu  neautentizovan\u00e9mu \u00fato\u010dn\u00edkovi je prot\u0159ednictv\u00edm odesl\u00e1n\u00ed speci\u00e1ln\u011b vytvo\u0159en\u00edch HTTP zpr\u00e1v umo\u017en\u011bno vykonat DoS \u00fatok [1].",
+                "exposure_date": "2023.12.02",
+                "impact": [
+                    "Denial of service"
+                ],
+                "links": [
+                    "https://github.com/squid-cache/squid/security/advisories/GHSA-8w9r-p88v-mmx9"
+                ],
+                "recommendations": "Zranitelnost je opravena ve verzi 6.5  [1].",
+                "tlp": "CLEAR",
+                "update_date": "2023.12.06"
+            },
+            "created": {
+                "day": 6,
+                "month": 12,
+                "year": 2023
+            },
+            "last_updated": {
+                "day": 24,
+                "month": 1,
+                "year": 2024
+            },
+            "name": "Squid -  DoS (CVE-2023-49285)",
+            "name_prefix": "",
+            "news_items": [],
+            "type": "Vulnerability Report",
+            "type_description": "Basic report type",
+            "uuid": "ad3eddd8-a247-438c-bcd8-b4f1efcae18d"
+        },
+        {
+            "attrs": {
+                "affected_systems": [
+                    "Squid; <6.5"
+                ],
+                "confidentiality": "",
+                "cve": [
+                    "CVE-2023-49286"
+                ],
+                "cvss": {
+                    "baseScore": 8.6
+                },
+                "description": "Vzd\u00e1len\u00e9mu neautentizovan\u00e9mu \u00fato\u010dn\u00edkovi je  p\u0159i vyt\u00ed\u017een\u00ed proxy serveru umo\u017en\u011bno vykonat DoS \u00fatok [2].",
+                "exposure_date": "2023.12.02",
+                "impact": [
+                    "Denial of service"
+                ],
+                "links": [
+                    "https://github.com/squid-cache/squid/security/advisories/GHSA-xggx-9329-3c27"
+                ],
+                "recommendations": "Zranitelnost je opravena  ve verzi 6.5.",
+                "tlp": "CLEAR",
+                "update_date": "2023.12.06"
+            },
+            "created": {
+                "day": 6,
+                "month": 12,
+                "year": 2023
+            },
+            "last_updated": {
+                "day": 24,
+                "month": 1,
+                "year": 2024
+            },
+            "name": "Squid - DoS  (CVE-2023-49286)",
+            "name_prefix": "",
+            "news_items": [],
+            "type": "Vulnerability Report",
+            "type_description": "Basic report type",
+            "uuid": "791107cd-8969-4e72-9698-f3ec6b177ba2"
+        },
+        {
+            "attrs": {
+                "affected_systems": [
+                    "Squid; >=3.5, <=5.9"
+                ],
+                "confidentiality": "",
+                "cve": [
+                    "CVE-2023-49288"
+                ],
+                "cvss": {
+                    "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H",
+                    "baseScore": 8.6
+                },
+                "cwe": [
+                    "15",
+                    "41"
+                ],
+                "description": "Vzd\u00e1len\u00e9mu   neautentizovan\u00e9mu \u00fato\u010dn\u00edkovi je umo\u017en\u011bno vykonat DoS \u00fatok na proxy server s nakonfigurovanou funkc\u00ed \"collapsed forwarding\" [3][4].",
+                "exposure_date": "2023.12.02",
+                "impact": [
+                    "Denial of service"
+                ],
+                "links": [
+                    "https://github.com/squid-cache/squid/security/advisories/GHSA-rj5h-46j6-q2g5",
+                    "https://wiki.squid-cache.org/Features/CollapsedForwarding"
+                ],
+                "recommendations": "  ",
+                "tlp": "CLEAR",
+                "update_date": "2023.12.06"
+            },
+            "created": {
+                "day": 6,
+                "month": 12,
+                "year": 2023
+            },
+            "last_updated": {
+                "day": 25,
+                "month": 1,
+                "year": 2024
+            },
+            "name": "Squid -   DoS  (CVE-2023-49288)",
+            "name_prefix": "",
+            "news_items": [],
+            "type": "Vulnerability Report",
+            "type_description": "Basic report type",
+            "uuid": "ccc07be6-cdc2-493c-8d11-6b84f9da4a07"
+        }
+    ]
+}

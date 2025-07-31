@@ -1,0 +1,51 @@
+{
+    "Category": [
+        "Vulnerable.Open",
+        "Test"
+    ],
+    "Description": "Vulnerable version of a software was found (CVSS 7.5)",
+    "DetectTime": "2023-11-01T22:57:53Z",
+    "Format": "IDEA0",
+    "ID": "d4b2f651-89dd-43f3-9d57-f139568358dd",
+    "Node": [
+        {
+            "Name": "cz.cesnet.va2am",
+            "Note": "Vulnerability Assessment to Asset Management Integration",
+            "Type": [
+                "Recon"
+            ]
+        }
+    ],
+    "Ref": [
+        "cvr:2"
+    ],
+    "Source": [
+        {
+            "Hostname": [
+                "armor.grid.cesnet.cz"
+            ],
+            "IP4": [
+                "78.128.216.110"
+            ],
+            "IP6": [
+                "2001:718:ff05:202::110"
+            ],
+            "Port": [
+                22222
+            ],
+            "Proto": [
+                "tcp"
+            ],
+            "Ref": [
+                "cve:CVE-2023-36844",
+                "cve:CVE-2023-36845",
+                "cve:CVE-2023-36846",
+                "cve:CVE-2023-36847",
+                "cve:CVE-2023-36851"
+            ],
+            "ServiceName": "openbsd openssh",
+            "ServiceVersion": "6.7p1"
+        }
+    ],
+    "TLP": "AMBER"
+}

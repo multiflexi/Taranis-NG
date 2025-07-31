@@ -1,0 +1,65 @@
+{
+    "product": {
+        "date": {
+            "day": 21,
+            "month": 11,
+            "year": 2023
+        },
+        "id": "2",
+        "links": [
+            "https://supportportal.juniper.net/s/article/2023-08-Out-of-Cycle-Security-Bulletin-Junos-OS-SRX-Series-and-EX-Series-Multiple-vulnerabilities-in-J-Web-can-be-combined-to-allow-a-preAuth-Remote-Code-Execution?language=en_US"
+        ],
+        "max_tlp": "CLEAR",
+        "product_type": "JSON",
+        "product_type_description": "JSON test v\u00fdstup pre automatiz\u00e1ciu.",
+        "title": "Juniper opravuje 5 zranite\u013enost\u00ed v zariadeniach s\u00e9rie SRX a EX",
+        "user": {
+            "id": 8,
+            "name": "Martin Kraj\u010di",
+            "username": "krajci"
+        }
+    },
+    "report_items": [
+        {
+            "attrs": {
+                "affected_systems": [
+                    "Juniper Junos; >=21.1, <23.0; >=23.4, <24.0"
+                ],
+                "confidentiality": "",
+                "cve": [
+                    "CVE-2023-36844",
+                    "CVE-2023-36845"
+                ],
+                "cvss": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+                "cvss_number": "5.3",
+                "description": "Neautentizovan\u00e9mu vzdialen\u00e9mu \u00fato\u010dn\u00edkovi je v J-Web pomocou \u0161peci\u00e1lne vytvorenej po\u017eiadavky umo\u017enen\u00e9 meni\u0165 PHP premenn\u00e9 prostredia.",
+                "exposure_date": "2023.08.17",
+                "impact": [
+                    "Unauthorized change in system"
+                ],
+                "links": [
+                    "https://supportportal.juniper.net/s/article/2023-08-Out-of-Cycle-Security-Bulletin-Junos-OS-SRX-Series-and-EX-Series-Multiple-vulnerabilities-in-J-Web-can-be-combined-to-allow-a-preAuth-Remote-Code-Execution?language=en_US"
+                ],
+                "recommendations": "Postihnut\u00e9 produkty a ich opraven\u00e9 verzie:\nEX Series - 20.4R3-S8, 21.2R3-S6, 21.3R3-S5*, 21.4R3-S4, 22.1R3-S3, 22.2R3-S1",
+                "tlp": "CLEAR",
+                "update_date": "2023.09.07"
+            },
+            "created": {
+                "day": 25,
+                "month": 9,
+                "year": 2023
+            },
+            "last_updated": {
+                "day": 25,
+                "month": 9,
+                "year": 2023
+            },
+            "name": "JunosOS 1",
+            "name_prefix": "",
+            "news_items": [],
+            "type": "Vulnerability Report",
+            "type_description": "Basic report type",
+            "uuid": "7d580f6b-8ef7-42b1-877a-873d9910f275"
+        }
+    ]
+}

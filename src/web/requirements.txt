@@ -1,0 +1,7 @@
+gunicorn[gevent]
+flask>=3.1
+requests>=2.32
+packaging>=24.2
+bleach[css]>=6.2
+feedgen>=1.0
+cachelib>=0.13

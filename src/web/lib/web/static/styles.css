@@ -1,0 +1,25 @@
+a {
+    text-decoration: none;
+}
+
+input[type='radio'] {
+    accent-color: blue;
+}
+
+.text-field {
+    border: 1px solid #000000;
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+.search-form {
+    max-width: 100%;
+}
+
+@media (min-width: 992px) {
+    .search-form {
+        max-width: 36%;
+    }
+}
