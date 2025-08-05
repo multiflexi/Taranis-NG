@@ -219,6 +219,16 @@ export const router = new Router({
             meta: { requiresAuth: true, requiresPerm: [Permissions.CONFIG_PUBLISHER_PRESET_ACCESS] }
         },
         {
+            path: '/config/publishers/release_presets',
+            name: 'release_presets',
+            components: {
+                default: () => import('./views/admin/ReleasePresetsView.vue'),
+                nav: () => import('./views/nav/ConfigNav.vue')
+
+            },
+            meta: { requiresAuth: true, requiresPerm: [Permissions.CONFIG_PUBLISHER_PRESET_ACCESS] }
+        },
+        {
             path: '/config/remote/access',
             name: 'remote-access',
             components: {

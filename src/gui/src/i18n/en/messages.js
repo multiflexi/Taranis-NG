@@ -96,6 +96,7 @@ const messages_en = {
         local: "Local",
         settings: "Application Settings",
         ai_providers: "Local AI models",
+        release_presets: "Release Presets"
     },
 
     notification: {
