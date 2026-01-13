@@ -8,5 +8,5 @@ version = "v25.12.1"
 description = "Taranis-NG Shared Classes"
 requires-python = ">=3.10"
 dependencies = [
-    "marshmallow==4.0.0"
+    "marshmallow==4.1.2"
 ]
