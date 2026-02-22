@@ -859,7 +859,6 @@ const messages_en = {
             filter_unimportant: "Show unimportant news items",
             filter_relevant: "Show relevant news items",
             filter_irrelevant: "Show irrelevant news items",
-            filter_in_analyze: "Show/hide news items in analysis",
             range: {
                 ALL: "Show all news items",
                 TODAY: "Show today's news items",

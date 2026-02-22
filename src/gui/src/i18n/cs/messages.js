@@ -858,7 +858,6 @@ const messages_cs = {
             filter_unimportant: "Zobrazit nedůležité novinky",
             filter_relevant: "Zobrazit relevantní novinky",
             filter_irrelevant: "Zobrazit irelevantní novinky",
-            filter_in_analyze: "Zobrazit/Skrýt analyzované novinky",
             range: {
                 ALL: "Zobrazit všechny novinky",
                 TODAY: "Zobrazit dnešní novinky",
