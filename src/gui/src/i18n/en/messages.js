@@ -935,8 +935,9 @@ const messages_en = {
 
     publish: {
         tooltip: {
-            filter_published: "Show published products",
-            filter_unpublished: "Show unpublished products",
+            filter_all: "Currently showing: all",
+            filter_published: "Currently showing: published",
+            filter_unpublished: "Currently showing: unpublished",
             range: {
                 ALL: "Show all products",
                 TODAY: "Show today's products",

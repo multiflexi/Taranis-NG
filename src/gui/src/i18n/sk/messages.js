@@ -297,8 +297,6 @@ const messages_sk = {
         },
     },
 
-
-
     toolbar_filter: {
         search: "Hladanie",
         all: "Všetko",

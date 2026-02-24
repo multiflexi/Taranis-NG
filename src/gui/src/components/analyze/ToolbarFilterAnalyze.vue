@@ -121,7 +121,7 @@
             completeFilterIcon() {
                 if (this.filter.completed === false) return this.UI.ICON.INCOMPLETED
                 if (this.filter.completed === true) return this.UI.ICON.COMPLETED
-                return "mdi-progress-helper"
+                return this.UI.ICON.NO_STATE
             },
 
             completeFilterTooltip() {

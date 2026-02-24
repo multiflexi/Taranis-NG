@@ -27,12 +27,9 @@
                 <v-icon v-bind="UI.TOOLBAR.ICON.CHIPS_SEPARATOR">{{ UI.ICON.SEPARATOR }}</v-icon>
 
                 <!-- FILTER -->
-                <v-chip-group v-bind="UI.TOOLBAR.GROUP.FILTER_ONE">
-                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterPublished">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('publish.tooltip.filter_published')">{{ UI.ICON.COMPLETED }}</v-icon>
-                    </v-chip>
-                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterUnpublished">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('publish.tooltip.filter_unpublished')">{{ UI.ICON.INCOMPLETED }}</v-icon>
+                <v-chip-group v-bind="UI.TOOLBAR.GROUP.FILTER_MULTI" v-model="activeFilters">
+                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterPublished" id="button_filter_published" value="published">
+                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="publishedFilterTooltip">{{ publishedFilterIcon }}</v-icon>
                     </v-chip>
                 </v-chip-group>
 
@@ -64,15 +61,11 @@
 
     export default {
         name: "ToolbarFilterPublish",
+        mixins: [AuthMixin],
         props: {
             title: String,
             dialog: String,
             total_count_title: String
-        },
-        computed: {
-            totalCount() {
-                return this.$store.getters.getProducts.total_count
-            }
         },
         data: () => ({
             status: [],
@@ -87,23 +80,53 @@
             filter: {
                 search: "",
                 range: "ALL",
-                published: false,
-                unpublished: false,
+                published: "ALL",
                 sort: "DATE_DESC"
             },
             timeout: null
         }),
-        mixins: [AuthMixin],
-        methods: {
-            filterPublished() {
-                this.filter.published = !this.filter.published;
-                this.filter.unpublished = false;
-                this.$root.$emit('update-products-filter', this.filter);
+        computed: {
+            totalCount() {
+                return this.$store.getters.getProducts.total_count
             },
 
-            filterUnpublished() {
-                this.filter.unpublished = !this.filter.unpublished;
-                this.filter.published = false;
+            activeFilters: {
+                get() {
+                    const result = []
+                    if (this.filter.published === true || this.filter.published === false) result.push('published')
+                    return result
+                },
+                set() {
+                    // Chip-group requires a setter, but we handle clicks manually
+                }
+            },
+
+            publishedFilterIcon() {
+                if (this.filter.published === false) return this.UI.ICON.INCOMPLETED
+                if (this.filter.published === true) return this.UI.ICON.COMPLETED
+                return this.UI.ICON.NO_STATE
+            },
+
+            publishedFilterTooltip() {
+                if (this.filter.published === "ALL") {
+                    return this.$t('publish.tooltip.filter_all')
+                } else if (this.filter.published === true) {
+                    return this.$t('publish.tooltip.filter_published')
+                } else {
+                    return this.$t('publish.tooltip.filter_unpublished')
+                }
+            },
+        },
+        methods: {
+            filterPublished() {
+                // Cycle through three states
+                if (this.filter.published === "ALL") {
+                    this.filter.published = true;
+                } else if (this.filter.published === true) {
+                    this.filter.published = false;
+                } else {
+                    this.filter.published = "ALL";
+                }
                 this.$root.$emit('update-products-filter', this.filter);
             },
 

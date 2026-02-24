@@ -1,13 +1,19 @@
 import ApiService from "@/services/api_service";
 
 export function getAllProducts(filter_data) {
-    let filter = "?search=" + encodeURIComponent(filter_data.filter.search)
-    filter += "&range=" + encodeURIComponent(filter_data.filter.range)
-    filter += "&published=" + encodeURIComponent(filter_data.filter.published)
-    filter += "&unpublished=" + encodeURIComponent(filter_data.filter.unpublished)
-    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
-    filter += "&offset=" + encodeURIComponent(filter_data.offset)
+    let filter = "?offset=" + encodeURIComponent(filter_data.offset)
     filter += "&limit=" + encodeURIComponent(filter_data.limit)
+    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
+
+    if (filter_data.filter.search != "") {
+        filter += "&search=" + encodeURIComponent(filter_data.filter.search)
+    }
+    if (filter_data.filter.published != "ALL") {
+        filter += "&published=" + encodeURIComponent(filter_data.filter.published)
+    }
+    if (filter_data.filter.range != "ALL") {
+        filter += "&range=" + encodeURIComponent(filter_data.filter.range)
+    }
 
     return ApiService.getWithCancel('screenData', '/publish/products' + filter)
 }

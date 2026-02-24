@@ -6,7 +6,7 @@ function buildFilterQueryString(filter_data) {
     filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
 
     if (filter_data.filter.search != "") {
-        filter += "?search=" + encodeURIComponent(filter_data.filter.search)
+        filter += "&search=" + encodeURIComponent(filter_data.filter.search)
     }
     if (filter_data.filter.completed != "ALL") {
         filter += "&completed=" + encodeURIComponent(filter_data.filter.completed)

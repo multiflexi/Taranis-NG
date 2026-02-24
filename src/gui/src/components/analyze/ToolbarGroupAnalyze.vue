@@ -106,10 +106,9 @@ export default {
         selectAll() {
             // Use default filter structure matching ContentDataAnalyze
             const filter = {
-                search: '',
-                completed: false,
-                incompleted: false,
+                search: "",
                 range: 'ALL',
+                completed: "ALL",
                 sort: 'DATE_DESC'
             };
             const group = this.$store.getters.getCurrentReportItemGroup;

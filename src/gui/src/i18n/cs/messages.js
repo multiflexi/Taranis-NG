@@ -935,8 +935,9 @@ const messages_cs = {
 
     publish: {
         tooltip: {
-            filter_published: "Zobrazit publikované produkty",
-            filter_unpublished: "Zobrazit nepublikované produkty",
+            filter_all: "Aktuálně zobrazeno: vše",
+            filter_published: "Aktuálně zobrazeno: publikované",
+            filter_unpublished: "Aktuálně zobrazeno: nepublikované",
             range: {
                 ALL: "Zobrazit všechny reporty",
                 TODAY: "Zobrazit dnešní reporty",

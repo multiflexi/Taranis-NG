@@ -259,6 +259,7 @@ const icons = {
     INCOMPLETED: "mdi-progress-close",
     LIKE: "mdi-thumb-up",
     MULTISELECT: "mdi-checkbox-multiple-marked-outline",
+    NO_STATE: "mdi-progress-helper",
     PLUS: "mdi-plus-circle-outline",
     READ: "mdi-eye",
     RELEVANT: "mdi-thumb-up",
