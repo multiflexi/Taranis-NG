@@ -131,9 +131,9 @@
             activeFilters: {
                 get() {
                     const result = []
-                    if (this.filter.read === true || this.filter.read === 'unread') result.push('read')
-                    if (this.filter.important === true || this.filter.important === 'unimportant') result.push('important')
-                    if (this.filter.relevant === true || this.filter.relevant === 'irrelevant') result.push('relevant')
+                    if (this.filter.read === true || this.filter.read === false) result.push('read')
+                    if (this.filter.important === true || this.filter.important === false) result.push('important')
+                    if (this.filter.relevant === true || this.filter.relevant === false) result.push('relevant')
                     return result
                 },
                 set() {
@@ -142,37 +142,48 @@
             },
 
             readFilterIcon() {
-                if (this.filter.read === true) return this.UI.ICON.READ
-                return this.UI.ICON.UNREAD
+                if (this.filter.read === false) return this.UI.ICON.UNREAD
+                return this.UI.ICON.READ
             },
 
             readFilterTooltip() {
-                if (this.filter.read === true) return this.$t('assess.tooltip.filter_read')
-                return this.$t('assess.tooltip.filter_unread')
+                if (this.filter.read === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.read === true) {
+                    return this.$t('assess.tooltip.filter_read')
+                } else {
+                    return this.$t('assess.tooltip.filter_unread')
+                }
             },
 
             importantFilterIcon() {
-                if (this.filter.important === true) return this.UI.ICON.IMPORTANT
-                if (this.filter.important === 'unimportant') return this.UI.ICON.UNIMPORTANT
+                if (this.filter.important === false) return this.UI.ICON.UNIMPORTANT
                 return this.UI.ICON.IMPORTANT
             },
 
             importantFilterTooltip() {
-                if (this.filter.important === true) return this.$t('assess.tooltip.filter_important')
-                if (this.filter.important === 'unimportant') return this.$t('assess.tooltip.filter_unimportant')
-                return this.$t('assess.tooltip.filter_important')
+                if (this.filter.important === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.important === true) {
+                    return this.$t('assess.tooltip.filter_important')
+                } else {
+                    return this.$t('assess.tooltip.filter_unimportant')
+                }
             },
 
             relevantFilterIcon() {
-                if (this.filter.relevant === true) return this.UI.ICON.LIKE
-                if (this.filter.relevant === 'irrelevant') return this.UI.ICON.UNLIKE
+                if (this.filter.relevant === false) return this.UI.ICON.UNLIKE
                 return this.UI.ICON.LIKE
             },
 
             relevantFilterTooltip() {
-                if (this.filter.relevant === true) return this.$t('assess.tooltip.filter_relevant')
-                if (this.filter.relevant === 'irrelevant') return this.$t('assess.tooltip.filter_irrelevant')
-                return this.$t('assess.tooltip.filter_relevant')
+                if (this.filter.relevant === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.relevant === true) {
+                    return this.$t('assess.tooltip.filter_relevant')
+                } else {
+                    return this.$t('assess.tooltip.filter_irrelevant')
+                }
             }
         },
         data: () => ({
@@ -189,9 +200,9 @@
             filter: {
                 search: "",
                 range: "ALL",
-                read: 'unread',
-                important: false,
-                relevant: false,
+                read: false,
+                important: "ALL",
+                relevant: "ALL",
                 sort: "DATE_DESC"
             },
             timeout: null,
@@ -206,13 +217,13 @@
             },
 
             filterRead() {
-                // Cycle through three states: false (off) -> true (read) -> 'unread' -> false
-                if (this.filter.read === false) {
+                // Cycle through three states
+                if (this.filter.read === "ALL") {
                     this.filter.read = true;
                 } else if (this.filter.read === true) {
-                    this.filter.read = 'unread';
-                } else {
                     this.filter.read = false;
+                } else {
+                    this.filter.read = "ALL";
                 }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {
@@ -221,13 +232,13 @@
             },
 
             filterImportant() {
-                // Cycle through three states: false (off) -> true (important) -> 'unimportant' -> false
-                if (this.filter.important === false) {
+                // Cycle through three states
+                if (this.filter.important === "ALL") {
                     this.filter.important = true;
                 } else if (this.filter.important === true) {
-                    this.filter.important = 'unimportant';
-                } else {
                     this.filter.important = false;
+                } else {
+                    this.filter.important = "ALL";
                 }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {
@@ -236,13 +247,13 @@
             },
 
             filterRelevant() {
-                // Cycle through three states: false (off) -> true (relevant/thumbs up) -> 'irrelevant' (thumbs down) -> false
-                if (this.filter.relevant === false) {
+                // Cycle through three states
+                if (this.filter.relevant === "ALL") {
                     this.filter.relevant = true;
                 } else if (this.filter.relevant === true) {
-                    this.filter.relevant = 'irrelevant';
-                } else {
                     this.filter.relevant = false;
+                } else {
+                    this.filter.relevant = "ALL";
                 }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {

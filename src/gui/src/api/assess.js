@@ -1,17 +1,25 @@
 import ApiService from "@/services/api_service";
 
 function buildFilterQueryString(filter_data) {
-    let filter = "?search=" + encodeURIComponent(filter_data.filter.search)
-    filter += "&read=" + encodeURIComponent(filter_data.filter.read === true)
-    filter += "&unread=" + encodeURIComponent(filter_data.filter.read === 'unread')
-    filter += "&important=" + encodeURIComponent(filter_data.filter.important === true)
-    filter += "&unimportant=" + encodeURIComponent(filter_data.filter.important === 'unimportant')
-    filter += "&relevant=" + encodeURIComponent(filter_data.filter.relevant === true)
-    filter += "&irrelevant=" + encodeURIComponent(filter_data.filter.relevant === 'irrelevant')
-    filter += "&range=" + encodeURIComponent(filter_data.filter.range)
-    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
-    filter += "&offset=" + encodeURIComponent(filter_data.offset || 0)
+    let filter = "?offset=" + encodeURIComponent(filter_data.offset || 0)
     filter += "&limit=" + encodeURIComponent(filter_data.limit || 50)
+    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
+
+    if (filter_data.filter.search != "") {
+        filter += "&search=" + encodeURIComponent(filter_data.filter.search)
+    }
+    if (filter_data.filter.read != "ALL") {
+        filter += "&read=" + encodeURIComponent(filter_data.filter.read === true)
+    }
+    if (filter_data.filter.important != "ALL") {
+        filter += "&important=" + encodeURIComponent(filter_data.filter.important === true)
+    }
+    if (filter_data.filter.relevant != "ALL") {
+        filter += "&relevant=" + encodeURIComponent(filter_data.filter.relevant === true)
+    }
+    if (filter_data.filter.range != "ALL") {
+        filter += "&range=" + encodeURIComponent(filter_data.filter.range)
+    }
     return filter
 }
 

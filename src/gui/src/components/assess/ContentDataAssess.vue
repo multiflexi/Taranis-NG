@@ -52,9 +52,9 @@
             filter: {
                 search: "",
                 range: "ALL",
-                read: 'unread',
-                important: false,
-                relevant: false,
+                read: false,
+                important: "ALL",
+                relevant: "ALL",
                 sort: "DATE_DESC"
             },
             aggregate_open: []

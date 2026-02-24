@@ -812,28 +812,28 @@ class NewsItemAggregate(db.Model):
                 NewsItemAggregate.id == NewsItemAggregateSearchIndex.news_item_aggregate_id,
             ).filter(NewsItemAggregateSearchIndex.data.like(search_string))
 
-        if "read" in filters and filters["read"].lower() == "true":
-            query = query.filter(NewsItemAggregate.read.is_(True))
+        if "read" in filters:
+            if filters["read"].lower() == "true":
+                query = query.filter(NewsItemAggregate.read.is_(True))
+            else:
+                query = query.filter(NewsItemAggregate.read.is_(False))
 
-        if "unread" in filters and filters["unread"].lower() == "true":
-            query = query.filter(NewsItemAggregate.read.is_(False))
+        if "important" in filters:
+            if filters["important"].lower() == "true":
+                query = query.filter(NewsItemAggregate.important.is_(True))
+            else:
+                query = query.filter(NewsItemAggregate.important.is_(False))
 
-        if "important" in filters and filters["important"].lower() == "true":
-            query = query.filter(NewsItemAggregate.important.is_(True))
-
-        if "unimportant" in filters and filters["unimportant"].lower() == "true":
-            query = query.filter(NewsItemAggregate.important.is_(False))
-
-        if "relevant" in filters and filters["relevant"].lower() == "true":
-            query = query.filter(NewsItemAggregate.likes > 0)
-
-        if "irrelevant" in filters and filters["irrelevant"].lower() == "true":
-            query = query.filter(NewsItemAggregate.dislikes > 0)
+        if "relevant" in filters:
+            if filters["relevant"].lower() == "true":
+                query = query.filter(NewsItemAggregate.likes > 0)
+            else:
+                query = query.filter(NewsItemAggregate.dislikes > 0)
 
         if "in_analyze" in filters and filters["in_analyze"].lower() == "true":
             query = query.join(ReportItemNewsItemAggregate, NewsItemAggregate.id == ReportItemNewsItemAggregate.news_item_aggregate_id)
 
-        if "range" in filters and filters["range"] != "ALL":
+        if "range" in filters:
             date_limit = datetime.now(TZ).replace(hour=0, minute=0, second=0, microsecond=0)  # "TODAY"
             if filters["range"] == "WEEK":
                 date_limit -= timedelta(days=date_limit.weekday())
