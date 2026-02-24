@@ -48,6 +48,11 @@ export default {
 
     methods: {
         stateChange() {
+            // This only works in Assess. In Selector and Report's the news list is .dataset.id undefined -> it doesn't work there.
+            // JP: Focus should probably be rewritten to use card.id (DB id) instead of dataset.id (which is .pos).
+            // However, there is heavy 'on event' hell across sources, plus direct 'reference.function' calls from other components
+            // and they share same .pos variable. There is also 'our colored' focus and some kind of 'native' focus, which sometimes differ
+            if (this.$el.dataset.id == undefined) return;
             this.$root.$emit('change-state', 'SHOW_ITEM');
             this.$root.$emit('check-focus', this.$el.dataset.id);
             this.$root.$emit('update-pos', parseInt(this.$el.dataset.id));
@@ -111,17 +116,14 @@ export default {
             this.selected = selection.some(s => s.id === item.id);
         },
 
-        setFocus(id) {
-            if (this.$el.dataset.id == id) {
-                this.toolbar = true;
-                const layout = this.$el.querySelector(".card .layout");
-                if (layout) {
+        setFocus(pos) {
+            const action = (this.$el.dataset.id == pos) && (pos != undefined)
+            this.toolbar = action;
+            const layout = this.$el.querySelector(".card .layout");
+            if (layout) {
+                if (action) {
                     layout.classList.add('focus');
-                }
-            } else {
-                this.toolbar = false;
-                const layout = this.$el.querySelector(".card .layout");
-                if (layout) {
+                } else {
                     layout.classList.remove('focus');
                 }
             }
@@ -140,8 +142,8 @@ export default {
     mounted() {
         this.$root.$on('multi-select-off', this.multiSelectOff);
         this.$root.$on('sync-assess-selection', this.syncSelection);
-        this.$root.$on('check-focus', (id) => {
-            this.setFocus(id);
+        this.$root.$on('check-focus', (pos) => {
+            this.setFocus(pos);
         });
     },
 
