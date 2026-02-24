@@ -61,8 +61,6 @@ class ReportItems(Resource):
                 report_filter["search"] = request.args["search"]
             if request.args.get("completed"):
                 report_filter["completed"] = request.args["completed"]
-            if request.args.get("incompleted"):
-                report_filter["incompleted"] = request.args["incompleted"]
             if request.args.get("range"):
                 report_filter["range"] = request.args["range"]
             if request.args.get("sort"):

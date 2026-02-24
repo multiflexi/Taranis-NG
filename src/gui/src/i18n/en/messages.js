@@ -806,8 +806,9 @@ const messages_en = {
         total_count: "Report item count: ",
         select_all_success: "{count} items selected",
         tooltip: {
-            filter_completed: "Show completed report items",
-            filter_incomplete: "Show incomplete report items",
+            filter_all: "Currently showing: all",
+            filter_completed: "Currently showing: completed",
+            filter_incomplete: "Currently showing: incomplete",
             range: {
                 ALL: "Show all report items",
                 TODAY: "Show today's report items",

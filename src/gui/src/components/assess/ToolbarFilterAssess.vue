@@ -104,6 +104,7 @@
 
     export default {
         name: "ToolbarFilterAssess",
+        mixins: [AuthMixin],
         components: {
             ToolbarGroupAssess
         },
@@ -114,6 +115,30 @@
             total_count_title: String,
             selected_count_title: String,
         },
+        data: () => ({
+            status: [],
+            days: [
+                { title: 'toolbar_filter.all', icon: 'mdi-information-outline', type: 'info', filter: 'ALL' },
+                { title: 'toolbar_filter.today', icon: 'mdi-calendar-today', type: 'info', filter: 'TODAY' },
+                { title: 'toolbar_filter.this_week', icon: 'mdi-calendar-range', type: 'info', filter: 'WEEK' },
+                { title: 'toolbar_filter.this_month', icon: 'mdi-calendar-month', type: 'info', filter: 'MONTH' },
+                { title: 'toolbar_filter.last_7_days', icon: 'mdi-calendar-range', type: 'info', filter: 'LAST_7_DAYS' },
+                { title: 'toolbar_filter.last_31_days', icon: 'mdi-calendar-month', type: 'info', filter: 'LAST_31_DAYS' }
+            ],
+            data_count: 0,
+            filter: {
+                search: "",
+                range: "ALL",
+                read: false,
+                important: "ALL",
+                relevant: "ALL",
+                sort: "DATE_DESC"
+            },
+            timeout: null,
+            word_list_toggle: false,
+            review_toggle: false,
+            source_link_toggle: false,
+        }),
         computed: {
             totalCount() {
                 return this.data_count
@@ -186,31 +211,6 @@
                 }
             }
         },
-        data: () => ({
-            status: [],
-            days: [
-                { title: 'toolbar_filter.all', icon: 'mdi-information-outline', type: 'info', filter: 'ALL' },
-                { title: 'toolbar_filter.today', icon: 'mdi-calendar-today', type: 'info', filter: 'TODAY' },
-                { title: 'toolbar_filter.this_week', icon: 'mdi-calendar-range', type: 'info', filter: 'WEEK' },
-                { title: 'toolbar_filter.this_month', icon: 'mdi-calendar-month', type: 'info', filter: 'MONTH' },
-                { title: 'toolbar_filter.last_7_days', icon: 'mdi-calendar-range', type: 'info', filter: 'LAST_7_DAYS' },
-                { title: 'toolbar_filter.last_31_days', icon: 'mdi-calendar-month', type: 'info', filter: 'LAST_31_DAYS' }
-            ],
-            data_count: 0,
-            filter: {
-                search: "",
-                range: "ALL",
-                read: false,
-                important: "ALL",
-                relevant: "ALL",
-                sort: "DATE_DESC"
-            },
-            timeout: null,
-            word_list_toggle: false,
-            review_toggle: false,
-            source_link_toggle: false,
-        }),
-        mixins: [AuthMixin],
         methods: {
             updateDataCount(count) {
                 this.data_count = count

@@ -182,8 +182,9 @@ const messages_sk = {
         total_count: "Počet reportov: ",
         select_all_success: "{count} položiek vybraných",
         tooltip: {
-            filter_completed: "Zobraziť hotové analýzy",
-            filter_incomplete: "Zobraziť nedokončené analýzy",
+            filter_all: "Aktuálne zobrazené: všetko",
+            filter_completed: "Aktuálne zobrazené: hotové",
+            filter_incomplete: "Aktuálne zobrazené: nedokončené",
             range: {
                 ALL: "Zobraziť všetky reporty",
                 TODAY: "Zobraziť dnešné reporty",

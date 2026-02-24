@@ -34,8 +34,7 @@
             filter: {
                 search: "",
                 range: "ALL",
-                completed: false,
-                incompleted: false,
+                completed: "ALL",
                 sort: "DATE_DESC"
             }
         }),

@@ -805,8 +805,9 @@ const messages_cs = {
         total_count: "Počet analýz: ",
         select_all_success: "{count} položek vybráno",
         tooltip: {
-            filter_completed: "Zobrazit hotové analýzy",
-            filter_incomplete: "Zobrazit nedokončené analýzy",
+            filter_all: "Aktuálně zobrazeno: vše",
+            filter_completed: "Aktuálně zobrazeno: hotové",
+            filter_incomplete: "Aktuálně zobrazeno: nedokončené",
             range: {
                 ALL: "Zobrazit všechny analýzy",
                 TODAY: "Zobrazit dnešní analýzy",

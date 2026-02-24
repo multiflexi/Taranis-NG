@@ -1,16 +1,22 @@
 import ApiService from "@/services/api_service";
 
 function buildFilterQueryString(filter_data) {
-    let filter = "?search=" + encodeURIComponent(filter_data.filter.search)
-    filter += "&completed=" + encodeURIComponent(filter_data.filter.completed)
-    filter += "&incompleted=" + encodeURIComponent(filter_data.filter.incompleted)
-    filter += "&range=" + encodeURIComponent(filter_data.filter.range)
+    let filter = "?offset=" + encodeURIComponent(filter_data.offset || 0)
+    filter += "&limit=" + encodeURIComponent(filter_data.limit || 50)
     filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
-    if (filter_data.group !== null) {
+
+    if (filter_data.filter.search != "") {
+        filter += "?search=" + encodeURIComponent(filter_data.filter.search)
+    }
+    if (filter_data.filter.completed != "ALL") {
+        filter += "&completed=" + encodeURIComponent(filter_data.filter.completed)
+    }
+    if (filter_data.filter.range != "ALL") {
+        filter += "&range=" + encodeURIComponent(filter_data.filter.range)
+    }
+    if (filter_data.group !== "") {
         filter += "&group=" + encodeURIComponent(filter_data.group)
     }
-    filter += "&offset=" + encodeURIComponent(filter_data.offset || 0)
-    filter += "&limit=" + encodeURIComponent(filter_data.limit || 50)
     return filter
 }
 

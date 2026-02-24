@@ -27,12 +27,9 @@
                 <v-icon v-bind="UI.TOOLBAR.ICON.CHIPS_SEPARATOR">{{ UI.ICON.SEPARATOR }}</v-icon>
 
                 <!-- FILTER -->
-                <v-chip-group v-bind="UI.TOOLBAR.GROUP.FILTER_ONE">
-                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterCompleted">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('analyze.tooltip.filter_completed')">{{ UI.ICON.COMPLETED }}</v-icon>
-                    </v-chip>
-                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterIncompleted">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('analyze.tooltip.filter_incomplete')">{{ UI.ICON.INCOMPLETED }}</v-icon>
+                <v-chip-group v-bind="UI.TOOLBAR.GROUP.FILTER_MULTI" v-model="activeFilters">
+                    <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterCompleted" id="button_filter_completed" value="completed">
+                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="completeFilterTooltip">{{ completeFilterIcon }}</v-icon>
                     </v-chip>
                 </v-chip-group>
 
@@ -71,23 +68,15 @@
 
     export default {
         name: "ToolbarFilterAnalyze",
+        mixins: [AuthMixin],
+        components: {
+            ToolbarGroupAnalyze
+        },
         props: {
             title: String,
             dialog: String,
             total_count_title: String,
             multi_select: Boolean,
-        },
-        components: {
-            ToolbarGroupAnalyze
-        },
-        computed: {
-            totalCount() {
-                return this.data_count
-            },
-
-            showGroupToolbar() {
-                return this.multi_select && this.local_reports
-            }
         },
         data: () => ({
             local_reports: true,
@@ -104,35 +93,67 @@
             filter: {
                 search: "",
                 range: "ALL",
-                completed: false,
-                incompleted: false,
+                completed: "ALL",
                 sort: "DATE_DESC"
             },
             timeout: null
         }),
-        mixins: [AuthMixin],
+        computed: {
+            totalCount() {
+                return this.data_count
+            },
+
+            showGroupToolbar() {
+                return this.multi_select && this.local_reports
+            },
+
+            activeFilters: {
+                get() {
+                    const result = []
+                    if (this.filter.completed === true || this.filter.completed === false) result.push('completed')
+                    return result
+                },
+                set() {
+                    // Chip-group requires a setter, but we handle clicks manually
+                }
+            },
+
+            completeFilterIcon() {
+                if (this.filter.completed === false) return this.UI.ICON.INCOMPLETED
+                if (this.filter.completed === true) return this.UI.ICON.COMPLETED
+                return "mdi-progress-helper"
+            },
+
+            completeFilterTooltip() {
+                if (this.filter.completed === "ALL") {
+                    return this.$t('analyze.tooltip.filter_all')
+                } else if (this.filter.completed === true) {
+                    return this.$t('analyze.tooltip.filter_completed')
+                } else {
+                    return this.$t('analyze.tooltip.filter_incomplete')
+                }
+            },
+        },
         methods: {
             updateDataCount(count) {
                 this.data_count = count
             },
 
             filterCompleted() {
-                this.filter.completed = !this.filter.completed;
-                this.filter.incompleted = false;
+                // Cycle through three states
+                if (this.filter.completed === "ALL") {
+                    this.filter.completed = true;
+                } else if (this.filter.completed === true) {
+                    this.filter.completed = false;
+                } else {
+                    this.filter.completed = "ALL";
+                }
                 this.$emit('update-report-items-filter', this.filter);
                 if (this.multi_select) {
                     this.$refs.toolbarGroupAnalyze.disableMultiSelect()
                 }
             },
 
-            filterIncompleted() {
-                this.filter.incompleted = !this.filter.incompleted;
-                this.filter.completed = false;
-                this.$emit('update-report-items-filter', this.filter);
-                if (this.multi_select) {
-                    this.$refs.toolbarGroupAnalyze.disableMultiSelect()
-                }
-            },
 
             filterSort(sort) {
                 this.filter.sort = sort;
