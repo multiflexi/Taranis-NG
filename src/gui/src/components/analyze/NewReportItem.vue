@@ -311,19 +311,19 @@
         },
 
         methods: {
-            addEmptyReportItem() {
+            initializeNewReportItem(newsItemAggregates = []) {
                 this.visible = true;
                 this.modify = true;
-                this.edit = false
-                this.overlay = false
+                this.edit = false;
+                this.overlay = false;
                 this.show_error = false;
                 this.field_locks.title = false;
                 this.field_locks.title_prefix = false;
                 this.attachmets_attributes_count = 0;
                 this.selected_type = null;
                 this.attribute_groups = [];
-                this.news_item_aggregates = [];
-                this.remote_report_items = []
+                this.news_item_aggregates = newsItemAggregates;
+                this.remote_report_items = [];
                 this.report_item.id = null;
                 this.report_item.uuid = null;
                 this.report_item.title = "";
@@ -332,7 +332,11 @@
                 this.selectDefaultState();
                 this.resetValidation();
                 this.reset_auto_generate();
-                this.initialFormState = this.snapshotForm()
+                this.initialFormState = this.snapshotForm();
+            },
+
+            addEmptyReportItem() {
+                this.initializeNewReportItem([]);
             },
 
             reportSelected() {
@@ -877,10 +881,7 @@
             });
 
             this.$root.$on('new-report', (data) => {
-                this.visible = true;
-                this.selected_type = null;
-                this.attribute_groups = [];
-                this.news_item_aggregates = data;
+                this.initializeNewReportItem(data);
                 this.$root.$emit('first-dialog', 'push');
             });
 
