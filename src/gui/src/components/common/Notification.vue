@@ -1,8 +1,10 @@
 <template>
     <div>
         <v-snackbar dark v-model="notification" :color="notify.type">
-            <span>{{ notificationMessage }}</span>
-            <v-btn text color="white--text" @click="notification = false">{{$t('notification.close')}}</v-btn>
+            <div class="d-flex align-center">
+                <span>{{ notificationMessage }}</span>
+                <v-btn class="ml-auto" text color="white--text" @click="notification = false">{{$t('notification.close')}}</v-btn>
+            </div>
         </v-snackbar>
     </div>
 </template>
