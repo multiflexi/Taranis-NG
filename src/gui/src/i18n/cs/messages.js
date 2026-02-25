@@ -803,9 +803,11 @@ const messages_cs = {
         from: "Od",
         to: "Do",
         total_count: "Počet analýz: ",
+        select_all_success: "{count} položek vybráno",
         tooltip: {
-            filter_completed: "Zobrazit hotové analýzy",
-            filter_incomplete: "Zobrazit nedokončené analýzy",
+            filter_all: "Aktuálně zobrazeno: vše",
+            filter_completed: "Aktuálně zobrazeno: hotové",
+            filter_incomplete: "Aktuálně zobrazeno: nedokončené",
             range: {
                 ALL: "Zobrazit všechny analýzy",
                 TODAY: "Zobrazit dnešní analýzy",
@@ -821,6 +823,8 @@ const messages_cs = {
                 },
             },
             toggle_selection: "Mód výběru analýz",
+            select_all: "Vybrat vše",
+            unselect_all: "Zrušit výběr",
             delete_items: "Smazat analýzy",
             publish_items: "Vytvořit z analýz report",
             delete_item: "Smazat analýzu",
@@ -847,11 +851,15 @@ const messages_cs = {
         download: "Stáhnout",
         total_count: "Počet novinek: ",
         selected_count: "Počet vybraných novinek: ",
+        select_all_success: "{count} položek vybráno",
         tooltip: {
-            filter_read: "Zobrazit nepřečtené novinky",
-            filter_important: "Zobrazit důležité novinky",
-            filter_relevant: "Zobrazit relevantní novinky",
-            filter_in_analyze: "Zobrazit/Skrýt analyzované novinky",
+            filter_all: "Aktuálně zobrazeno: vše",
+            filter_read: "Aktuálně zobrazeno: přečtené",
+            filter_unread: "Aktuálně zobrazeno: nepřečtené",
+            filter_important: "Aktuálně zobrazeno: důležité",
+            filter_unimportant: "Aktuálně zobrazeno: nedůležité",
+            filter_relevant: "Aktuálně zobrazeno: relevantní",
+            filter_irrelevant: "Aktuálně zobrazeno: nerelevantní",
             range: {
                 ALL: "Zobrazit všechny novinky",
                 TODAY: "Zobrazit dnešní novinky",
@@ -874,6 +882,8 @@ const messages_cs = {
             hide_source_link: "Skrýt odkazy na zdroje v novinkách",
             highlight_wordlist: "Zvýraznit slova ze seznamů slov",
             toggle_selection: "Mód výběru novinek",
+            select_all: "Vybrat vše",
+            unselect_all: "Zrušit výběr",
             group_items: "Sloučit novinky",
             ungroup_items: "Rozdělit novinky",
             analyze_items: "Vytvořit z novinek analýzu",
@@ -925,8 +935,9 @@ const messages_cs = {
 
     publish: {
         tooltip: {
-            filter_published: "Zobrazit publikované produkty",
-            filter_unpublished: "Zobrazit nepublikované produkty",
+            filter_all: "Aktuálně zobrazeno: vše",
+            filter_published: "Aktuálně zobrazeno: publikované",
+            filter_unpublished: "Aktuálně zobrazeno: nepublikované",
             range: {
                 ALL: "Zobrazit všechny reporty",
                 TODAY: "Zobrazit dnešní reporty",
@@ -1262,6 +1273,7 @@ const messages_cs = {
             "Některé vybrané novinky nebo sloučené novinky jsou již připojeny k analýze",
         server_error: "Neznámá chyba serveru...",
         validation: "Prosím vyplňte všechna povinná pole",
+        select_all_failed: "Selhalo vybrání všech položek",
     },
 
     confirm_close: {

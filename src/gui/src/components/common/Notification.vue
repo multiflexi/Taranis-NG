@@ -1,8 +1,10 @@
 <template>
     <div>
         <v-snackbar dark v-model="notification" :color="notify.type">
-            <span>{{ $t(notify.loc) }}</span>
-            <v-btn text color="white--text" @click="notification = false">{{$t('notification.close')}}</v-btn>
+            <div class="d-flex align-center">
+                <span>{{ notificationMessage }}</span>
+                <v-btn class="ml-auto" text color="white--text" @click="notification = false">{{$t('notification.close')}}</v-btn>
+            </div>
         </v-snackbar>
     </div>
 </template>
@@ -18,6 +20,15 @@
             notification: false,
             notify: Object
         }),
+
+        computed: {
+            notificationMessage() {
+                if (this.notify && this.notify.loc) {
+                    return this.$t(this.notify.loc, this.notify.params || {});
+                }
+                return '';
+            }
+        },
 
         mounted() {
             this.$root.$on('notification', (message) => {

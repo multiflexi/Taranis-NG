@@ -52,9 +52,9 @@
             filter: {
                 search: "",
                 range: "ALL",
-                read: true,
-                important: false,
-                relevant: false,
+                read: false,
+                important: "ALL",
+                relevant: "ALL",
                 sort: "DATE_DESC"
             },
             aggregate_open: []
@@ -77,7 +77,6 @@
             },
 
             infiniteScrolling(entries, observer, isIntersecting) {
-
                 if (this.news_items_data_loaded && isIntersecting) {
                     this.updateData(true, false)
                 }
@@ -152,6 +151,7 @@
                     this.$emit('new-data-loaded', this.$store.getters.getNewsItems.total_count);
                     setTimeout(() => {
                         this.$emit('card-items-reindex');
+                        this.$root.$emit('sync-assess-selection');  // add selection to newly loaded items, eg. user select all items and scroll down
                     }, 200);
                     setTimeout(() => {
                         this.news_items_data_loaded = true;

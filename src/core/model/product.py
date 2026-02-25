@@ -16,14 +16,13 @@ from marshmallow import fields, post_load
 from model.acl_entry import ACLEntry
 from model.report_item import ReportItem
 from model.state import StateDefinition, StateEnum
-from sqlalchemy import and_, func, or_, orm
-from sqlalchemy.sql.expression import cast
-
 from shared.common import TZ
 from shared.log_manager import logger
 from shared.schema.acl_entry import ItemType
 from shared.schema.product import ProductPresentationSchema, ProductSchemaBase
 from shared.schema.report_item import ReportItemIdSchema
+from sqlalchemy import and_, func, or_, orm
+from sqlalchemy.sql.expression import cast
 
 
 class NewProductSchema(ProductSchemaBase):
@@ -212,17 +211,15 @@ class Product(db.Model):
             search_string = "%" + filter["search"] + "%"
             query = query.filter(or_(Product.title.ilike(search_string), Product.description.ilike(search_string)))
 
-        if filter.get("published", "").lower() == "true":
+        if "published" in filter:
             published_state = StateDefinition.get_by_name(StateEnum.PUBLISHED.value)
             if published_state:
-                query = query.filter(Product.state_id == published_state.id)
+                if filter["published"].lower() == "true":
+                    query = query.filter(Product.state_id == published_state.id)
+                else:
+                    query = query.filter(or_(Product.state_id != published_state.id, Product.state_id.is_(None)))
 
-        if filter.get("unpublished", "").lower() == "true":
-            published_state = StateDefinition.get_by_name(StateEnum.PUBLISHED.value)
-            if published_state:
-                query = query.filter(or_(Product.state_id != published_state.id, Product.state_id.is_(None)))
-
-        if "range" in filter and filter["range"] != "ALL":
+        if "range" in filter:
             date_limit = datetime.now(tz=TZ)
             if filter["range"] == "TODAY":
                 date_limit = date_limit.replace(hour=0, minute=0, second=0, microsecond=0)

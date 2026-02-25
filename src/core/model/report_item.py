@@ -452,17 +452,15 @@ class ReportItem(db.Model):
                 ),
             )
 
-        if filter.get("completed", "").lower() == "true":
+        if "completed" in filter:
             completed_state = StateDefinition.get_by_name(StateEnum.COMPLETED.value)
             if completed_state:
-                query = query.filter(ReportItem.state_id == completed_state.id)
+                if filter["completed"].lower() == "true":
+                    query = query.filter(ReportItem.state_id == completed_state.id)
+                else:
+                    query = query.filter(or_(ReportItem.state_id != completed_state.id, ReportItem.state_id.is_(None)))
 
-        if filter.get("incompleted", "").lower() == "true":
-            completed_state = StateDefinition.get_by_name(StateEnum.COMPLETED.value)
-            if completed_state:
-                query = query.filter(or_(ReportItem.state_id != completed_state.id, ReportItem.state_id.is_(None)))
-
-        if filter.get("range", "ALL") != "ALL":
+        if "range" in filter:
             date_limit = datetime.now(TZ)
             if filter["range"] == "TODAY":
                 date_limit = date_limit.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -481,7 +479,7 @@ class ReportItem(db.Model):
 
             query = query.filter(ReportItem.created >= date_limit)
 
-        if filter.get("sort"):
+        if "sort" in filter:
             if filter["sort"] == "DATE_DESC":
                 query = query.order_by(db.desc(ReportItem.created))
 

@@ -30,13 +30,13 @@
                 <!-- FILTER -->
                 <v-chip-group v-bind="UI.TOOLBAR.GROUP.FILTER_MULTI" v-model="activeFilters">
                     <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterRead" id="button_filter_read" value="read">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('assess.tooltip.filter_read')">{{ UI.ICON.UNREAD }}</v-icon>
+                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="readFilterTooltip">{{ readFilterIcon }}</v-icon>
                     </v-chip>
                     <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterImportant" id="button_filter_important" value="important">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('assess.tooltip.filter_important')">{{ UI.ICON.IMPORTANT }}</v-icon>
+                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="importantFilterTooltip">{{ importantFilterIcon }}</v-icon>
                     </v-chip>
                     <v-chip v-bind="UI.TOOLBAR.CHIP.GROUP" @click="filterRelevant" id="button_filter_relevant" value="relevant">
-                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="$t('assess.tooltip.filter_relevant')">{{ UI.ICON.RELEVANT }}</v-icon>
+                        <v-icon v-bind="UI.TOOLBAR.ICON.CHIP" :title="relevantFilterTooltip">{{ relevantFilterIcon }}</v-icon>
                     </v-chip>
                 </v-chip-group>
 
@@ -104,6 +104,7 @@
 
     export default {
         name: "ToolbarFilterAssess",
+        mixins: [AuthMixin],
         components: {
             ToolbarGroupAssess
         },
@@ -114,6 +115,30 @@
             total_count_title: String,
             selected_count_title: String,
         },
+        data: () => ({
+            status: [],
+            days: [
+                { title: 'toolbar_filter.all', icon: 'mdi-information-outline', type: 'info', filter: 'ALL' },
+                { title: 'toolbar_filter.today', icon: 'mdi-calendar-today', type: 'info', filter: 'TODAY' },
+                { title: 'toolbar_filter.this_week', icon: 'mdi-calendar-range', type: 'info', filter: 'WEEK' },
+                { title: 'toolbar_filter.this_month', icon: 'mdi-calendar-month', type: 'info', filter: 'MONTH' },
+                { title: 'toolbar_filter.last_7_days', icon: 'mdi-calendar-range', type: 'info', filter: 'LAST_7_DAYS' },
+                { title: 'toolbar_filter.last_31_days', icon: 'mdi-calendar-month', type: 'info', filter: 'LAST_31_DAYS' }
+            ],
+            data_count: 0,
+            filter: {
+                search: "",
+                range: "ALL",
+                read: false,
+                important: "ALL",
+                relevant: "ALL",
+                sort: "DATE_DESC"
+            },
+            timeout: null,
+            word_list_toggle: false,
+            review_toggle: false,
+            source_link_toggle: false,
+        }),
         computed: {
             totalCount() {
                 return this.data_count
@@ -131,48 +156,75 @@
             activeFilters: {
                 get() {
                     const result = []
-                    if (this.filter.read) result.push('read')
-                    if (this.filter.important) result.push('important')
-                    if (this.filter.relevant) result.push('relevant')
+                    if (this.filter.read === true || this.filter.read === false) result.push('read')
+                    if (this.filter.important === true || this.filter.important === false) result.push('important')
+                    if (this.filter.relevant === true || this.filter.relevant === false) result.push('relevant')
                     return result
                 },
                 set() {
                     // Chip-group requires a setter, but we handle clicks manually
                 }
+            },
+
+            readFilterIcon() {
+                if (this.filter.read === false) return this.UI.ICON.UNREAD
+                return this.UI.ICON.READ
+            },
+
+            readFilterTooltip() {
+                if (this.filter.read === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.read === true) {
+                    return this.$t('assess.tooltip.filter_read')
+                } else {
+                    return this.$t('assess.tooltip.filter_unread')
+                }
+            },
+
+            importantFilterIcon() {
+                if (this.filter.important === false) return this.UI.ICON.UNIMPORTANT
+                return this.UI.ICON.IMPORTANT
+            },
+
+            importantFilterTooltip() {
+                if (this.filter.important === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.important === true) {
+                    return this.$t('assess.tooltip.filter_important')
+                } else {
+                    return this.$t('assess.tooltip.filter_unimportant')
+                }
+            },
+
+            relevantFilterIcon() {
+                if (this.filter.relevant === false) return this.UI.ICON.UNLIKE
+                return this.UI.ICON.LIKE
+            },
+
+            relevantFilterTooltip() {
+                if (this.filter.relevant === "ALL") {
+                    return this.$t('assess.tooltip.filter_all')
+                } else if (this.filter.relevant === true) {
+                    return this.$t('assess.tooltip.filter_relevant')
+                } else {
+                    return this.$t('assess.tooltip.filter_irrelevant')
+                }
             }
         },
-        data: () => ({
-            status: [],
-            days: [
-                { title: 'toolbar_filter.all', icon: 'mdi-information-outline', type: 'info', filter: 'ALL' },
-                { title: 'toolbar_filter.today', icon: 'mdi-calendar-today', type: 'info', filter: 'TODAY' },
-                { title: 'toolbar_filter.this_week', icon: 'mdi-calendar-range', type: 'info', filter: 'WEEK' },
-                { title: 'toolbar_filter.this_month', icon: 'mdi-calendar-month', type: 'info', filter: 'MONTH' },
-                { title: 'toolbar_filter.last_7_days', icon: 'mdi-calendar-range', type: 'info', filter: 'LAST_7_DAYS' },
-                { title: 'toolbar_filter.last_31_days', icon: 'mdi-calendar-month', type: 'info', filter: 'LAST_31_DAYS' }
-            ],
-            data_count: 0,
-            filter: {
-                search: "",
-                range: "ALL",
-                read: true,
-                important: false,
-                relevant: false,
-                sort: "DATE_DESC"
-            },
-            timeout: null,
-            word_list_toggle: false,
-            review_toggle: false,
-            source_link_toggle: false,
-        }),
-        mixins: [AuthMixin],
         methods: {
             updateDataCount(count) {
                 this.data_count = count
             },
 
             filterRead() {
-                this.filter.read = !this.filter.read;
+                // Cycle through three states
+                if (this.filter.read === "ALL") {
+                    this.filter.read = true;
+                } else if (this.filter.read === true) {
+                    this.filter.read = false;
+                } else {
+                    this.filter.read = "ALL";
+                }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {
                     this.$refs.toolbarGroupAssess.disableMultiSelect()
@@ -180,7 +232,14 @@
             },
 
             filterImportant() {
-                this.filter.important = !this.filter.important;
+                // Cycle through three states
+                if (this.filter.important === "ALL") {
+                    this.filter.important = true;
+                } else if (this.filter.important === true) {
+                    this.filter.important = false;
+                } else {
+                    this.filter.important = "ALL";
+                }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {
                     this.$refs.toolbarGroupAssess.disableMultiSelect()
@@ -188,7 +247,14 @@
             },
 
             filterRelevant() {
-                this.filter.relevant = !this.filter.relevant;
+                // Cycle through three states
+                if (this.filter.relevant === "ALL") {
+                    this.filter.relevant = true;
+                } else if (this.filter.relevant === true) {
+                    this.filter.relevant = false;
+                } else {
+                    this.filter.relevant = "ALL";
+                }
                 this.$emit('update-news-items-filter', this.filter);
                 if (this.analyze_selector === false) {
                     this.$refs.toolbarGroupAssess.disableMultiSelect()

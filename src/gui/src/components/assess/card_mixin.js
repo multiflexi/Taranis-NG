@@ -110,6 +110,12 @@ export default {
             this.selected = false
         },
 
+        syncSelection() {
+            const selection = this.$store.getters.getSelection;
+            const item = this.card || this.news_item;
+            this.selected = selection.some(s => s.id === item.id);
+        },
+
         setFocus(pos) {
             const action = (this.$el.dataset.id == pos) && (pos != undefined)
             this.toolbar = action;
@@ -135,6 +141,7 @@ export default {
 
     mounted() {
         this.$root.$on('multi-select-off', this.multiSelectOff);
+        this.$root.$on('sync-assess-selection', this.syncSelection);
         this.$root.$on('check-focus', (pos) => {
             this.setFocus(pos);
         });
@@ -142,6 +149,7 @@ export default {
 
     beforeDestroy() {
         this.$root.$off('multi-select-off', this.multiSelectOff);
+        this.$root.$off('sync-assess-selection', this.syncSelection);
         this.$root.$off('check-focus');
     },
 }

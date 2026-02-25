@@ -34,8 +34,7 @@
             filter: {
                 search: "",
                 range: "ALL",
-                completed: false,
-                incompleted: false,
+                completed: "ALL",
                 sort: "DATE_DESC"
             }
         }),
@@ -118,6 +117,9 @@
                             }
                         }
                         this.$emit('new-data-loaded', this.collections.length);
+                        setTimeout(() => {
+                            this.$root.$emit('sync-analyze-selection');  // add selection to newly loaded items, eg. user select all items and scroll down
+                        }, 200);
                         setTimeout(() => {
                             this.data_loaded = true
                         }, 1000);

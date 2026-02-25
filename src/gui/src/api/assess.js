@@ -1,5 +1,28 @@
 import ApiService from "@/services/api_service";
 
+function buildFilterQueryString(filter_data) {
+    let filter = "?offset=" + encodeURIComponent(filter_data.offset || 0)
+    filter += "&limit=" + encodeURIComponent(filter_data.limit || 50)
+    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
+
+    if (filter_data.filter.search != "") {
+        filter += "&search=" + encodeURIComponent(filter_data.filter.search)
+    }
+    if (filter_data.filter.read != "ALL") {
+        filter += "&read=" + encodeURIComponent(filter_data.filter.read === true)
+    }
+    if (filter_data.filter.important != "ALL") {
+        filter += "&important=" + encodeURIComponent(filter_data.filter.important === true)
+    }
+    if (filter_data.filter.relevant != "ALL") {
+        filter += "&relevant=" + encodeURIComponent(filter_data.filter.relevant === true)
+    }
+    if (filter_data.filter.range != "ALL") {
+        filter += "&range=" + encodeURIComponent(filter_data.filter.range)
+    }
+    return filter
+}
+
 export function getAllOSINTSourceGroupsAssess() {
     return ApiService.get('/assess/osint-source-groups')
 }
@@ -9,16 +32,11 @@ export function getManualOSINTSources() {
 }
 
 export function getNewsItemsByGroup(group_id, filter_data) {
-    let filter = "?search=" + encodeURIComponent(filter_data.filter.search)
-    filter += "&read=" + encodeURIComponent(filter_data.filter.read)
-    filter += "&important=" + encodeURIComponent(filter_data.filter.important)
-    filter += "&relevant=" + encodeURIComponent(filter_data.filter.relevant)
-    filter += "&range=" + encodeURIComponent(filter_data.filter.range)
-    filter += "&sort=" + encodeURIComponent(filter_data.filter.sort)
-    filter += "&offset=" + encodeURIComponent(filter_data.offset)
-    filter += "&limit=" + encodeURIComponent(filter_data.limit)
+    return ApiService.getWithCancel('screenData', '/assess/news-item-aggregates-by-group/' + group_id + buildFilterQueryString(filter_data))
+}
 
-    return ApiService.getWithCancel('screenData', '/assess/news-item-aggregates-by-group/' + group_id + filter)
+export function getAllNewsItemsByGroup(group_id, filter_data) {
+    return ApiService.get('/assess/news-item-aggregates-by-group/' + group_id + buildFilterQueryString(filter_data))
 }
 
 export function addNewsItem(data) {

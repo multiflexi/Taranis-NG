@@ -804,9 +804,11 @@ const messages_en = {
         from: "From",
         to: "To",
         total_count: "Report item count: ",
+        select_all_success: "{count} items selected",
         tooltip: {
-            filter_completed: "Show completed report items",
-            filter_incomplete: "Show incomplete report items",
+            filter_all: "Currently showing: all",
+            filter_completed: "Currently showing: completed",
+            filter_incomplete: "Currently showing: incomplete",
             range: {
                 ALL: "Show all report items",
                 TODAY: "Show today's report items",
@@ -822,6 +824,8 @@ const messages_en = {
                 },
             },
             toggle_selection: "Toggle report items selection mode",
+            select_all: "Select All",
+            unselect_all: "Unselect All",
             delete_items: "Delete report items",
             publish_items: "Create product from report items",
             delete_item: "Delete report item",
@@ -848,11 +852,15 @@ const messages_en = {
         download: "Download",
         total_count: "News item count: ",
         selected_count: "Selected news item count: ",
+        select_all_success: "{count} items selected",
         tooltip: {
-            filter_read: "Show unread news items",
-            filter_important: "Show important news items",
-            filter_relevant: "Show relevant news items",
-            filter_in_analyze: "Show/hide news items in analysis",
+            filter_all: "Currently showing: all",
+            filter_read: "Currently showing: read",
+            filter_unread: "Currently showing: unread",
+            filter_important: "Currently showing: important",
+            filter_unimportant: "Currently showing: unimportant",
+            filter_relevant: "Currently showing: relevant",
+            filter_irrelevant: "Currently showing: irrelevant",
             range: {
                 ALL: "Show all news items",
                 TODAY: "Show today's news items",
@@ -875,6 +883,8 @@ const messages_en = {
             hide_source_link: "Hide source links on news items",
             highlight_wordlist: "Highlight words using word lists",
             toggle_selection: "Toggle news items selection mode",
+            select_all: "Select All",
+            unselect_all: "Unselect All",
             group_items: "Group news items into aggregate",
             ungroup_items: "Ungroup news items from aggregate",
             analyze_items: "Create analysis report from news items",
@@ -925,8 +935,9 @@ const messages_en = {
 
     publish: {
         tooltip: {
-            filter_published: "Show published products",
-            filter_unpublished: "Show unpublished products",
+            filter_all: "Currently showing: all",
+            filter_published: "Currently showing: published",
+            filter_unpublished: "Currently showing: unpublished",
             range: {
                 ALL: "Show all products",
                 TODAY: "Show today's products",
@@ -1261,6 +1272,7 @@ const messages_en = {
             "Some of selected aggregates or news items are already assigned to a report item",
         server_error: "Unknown server error...",
         validation: "Please fill in all required fields",
+        select_all_failed: "Failed to select all items",
     },
 
     confirm_close: {
