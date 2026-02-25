@@ -14,7 +14,7 @@ function buildFilterQueryString(filter_data) {
     if (filter_data.filter.range != "ALL") {
         filter += "&range=" + encodeURIComponent(filter_data.filter.range)
     }
-    if (filter_data.group !== "") {
+    if (filter_data.group) {
         filter += "&group=" + encodeURIComponent(filter_data.group)
     }
     return filter
