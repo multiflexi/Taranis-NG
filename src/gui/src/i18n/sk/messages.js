@@ -751,6 +751,7 @@ const messages_sk = {
         select: "Vybrať analýzu",
         select_remote: "Vybrať analýzu zo vzdialených inštancií",
         attributes: "Atribúty",
+        side_by_side: "Zobraziť vedľa seba",
         confirm_close: {
             message:
                 "Máte neuložené zmeny. Naozaj chcete zatvoriť túto analýzu?",
@@ -1024,6 +1025,7 @@ const messages_sk = {
     },
 
     settings_enum: {
+        CASCADE_STATES_ENABLED: "Automatické kaskádové zmeny stavov",
         DARK_THEME: "Tmavý motiv",
         DATE_FORMAT: 'Formát dátumu',
         HOTKEYS: "Povoliť klávesové skratky",
