@@ -15,7 +15,7 @@ dependencies = [
     "Mastodon.py==2.2.1",
     "paramiko==4.0.0",
     "python-dotenv==1.2.2",
-    "requests==2.33.1",
+    "requests==2.34.0",
     "tweepy==4.16.0",
     "urllib3==2.6.3",
     "pymisp==2.5.34.1"
