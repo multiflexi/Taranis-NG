@@ -13,7 +13,7 @@ dependencies = [
     "gunicorn==25.3.0",
     "marshmallow==4.3.0",
     "Mastodon.py==2.2.1",
-    "paramiko==4.0.0",
+    "paramiko==5.0.0",
     "python-dotenv==1.2.2",
     "requests==2.34.0",
     "tweepy==4.16.0",
