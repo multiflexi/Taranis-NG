@@ -10,15 +10,15 @@ dependencies = [
     "Flask-Cors==6.0.2",
     "Flask-RESTful==0.3.10",
     "gevent==26.4.0",
-    "gunicorn==25.3.0",
+    "gunicorn==26.0.0",
     "marshmallow==4.3.0",
     "Mastodon.py==2.2.1",
-    "paramiko==4.0.0",
+    "paramiko==5.0.0",
     "python-dotenv==1.2.2",
-    "requests==2.33.1",
+    "requests==2.34.0",
     "tweepy==4.16.0",
-    "urllib3==2.6.3",
-    "pymisp==2.5.33.2"
+    "urllib3==2.7.0",
+    "pymisp==2.5.34.1"
 ]
 
 [build-system]
