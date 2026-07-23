@@ -32,7 +32,7 @@
         "axios": "^1.18.1",
         "date-fns": "^4.4.0",
         "pinia": "^4.0.2",
-        "primeicons": "^7.0.0",
+        "primeicons": "^8.0.0",
         "primevue": "^4.5.5",
         "quill": "^2.0.3",
         "vee-validate": "^4.14.11",
