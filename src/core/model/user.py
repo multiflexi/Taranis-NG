@@ -8,8 +8,6 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from collections.abc import Collection
 
-    from model.user import User
-
 from managers.db_manager import db
 from marshmallow import EXCLUDE, Schema, ValidationError, fields, post_load
 from model.auth_provider import AuthProvider, UserAuthIdentity
