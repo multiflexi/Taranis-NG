@@ -12,7 +12,7 @@ database from the models.
 Downgrade drops the column.
 
 Revision ID: b3e8d1f5a2c7
-Revises: 7a4c1e9b2d36
+Revises: d4a7f2c9e1b6
 Create Date: 2026-11-25 23:30:00.000000
 
 """
@@ -22,7 +22,7 @@ from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = "b3e8d1f5a2c7"
-down_revision = "7a4c1e9b2d36"
+down_revision = "d4a7f2c9e1b6"
 branch_labels = None
 depends_on = None
 

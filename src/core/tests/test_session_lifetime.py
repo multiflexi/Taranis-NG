@@ -150,5 +150,5 @@ def test_the_migration_adds_the_column_with_the_default() -> None:
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
 
-    assert (module.revision, module.down_revision) == ("b3e8d1f5a2c7", "7a4c1e9b2d36")
+    assert (module.revision, module.down_revision) == ("b3e8d1f5a2c7", "d4a7f2c9e1b6")
     assert 'server_default="24"' in MIGRATION.read_text()
